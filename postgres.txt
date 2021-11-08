@@ -1,0 +1,32 @@
+1. Установка postgresql
+
+yum install postgresql postgresql-server postgresql-libs postgresql-contrib python-psycopg2
+
+2. Инициализируем новую базу
+
+postgresql-setup initdb
+
+3. Запускаем сервис
+
+service postgresql start
+
+4. Создаем пользователя
+
+su postgres
+psql
+CREATE USER testuser with encrypted password 'pass';
+CREATE DATABASE test;
+grant all privileges on database test to testuser;
+
+5. Создаем дамп базы
+
+pg_dump -d test > test.sql
+
+6. Удаляем бд
+
+DROP DATABASE test;
+
+7. Восстановление из дампа
+
+psql -d test < test.sql
+
